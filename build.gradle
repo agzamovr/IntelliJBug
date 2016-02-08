@@ -1,0 +1,33 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'idea'
+
+compileJava {
+    //enable compilation in a separate daemon process
+    options.fork = true
+    //enable incremental compilation
+    options.incremental = true
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    springVersion = "4.2.4.RELEASE"
+    springSecurityVersion = "4.0.3.RELEASE"
+}
+
+dependencies {
+    providedCompile "javax.servlet:javax.servlet-api:3.1.0"
+    providedCompile "org.springframework:spring-context:$springVersion"
+    providedCompile "org.springframework:spring-webmvc:$springVersion"
+    providedCompile "org.springframework.security:spring-security-config:$springSecurityVersion"
+    providedCompile "org.springframework.security:spring-security-web:$springSecurityVersion"
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.9'
+}
